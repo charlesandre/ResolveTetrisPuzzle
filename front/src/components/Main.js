@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import data from './mockdata.js'
+import axios from 'axios'
 
 class Main extends Component {
 
@@ -15,14 +16,19 @@ class Main extends Component {
   }
 
   getData = () =>{
-    console.log("Hey lets talk to django")
-    fetch('http://localhost:8000/test/', {
-      'Access-Control-Allow-Origin': "*"
+
+    console.log(data.data.board)
+
+    axios.post('http://localhost:8000/test/', {
+      board:data.data.board,
+      elements:data.data.elements
     })
-    .then((response) => response.json())
-    .then((responseData) => {
-      console.log(responseData);
+    .then(function (response) {
+      console.log(response);
     })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {

@@ -1,13 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
-from django.shortcuts import render
-import numpy as np
-import itertools
-
 
 def drawOnBoard(board, element, x, y):
     for i in range(element.shape[0]):
@@ -59,7 +49,7 @@ def orderElements(board, elements):
             return True, solution, len(list(itertools.permutations(elements)))
     return False, board
 
-def findEveryOrders(elements):
+ def findEveryOrders(elements):
     array = []
     newElements = []
     for element in elements:
@@ -79,22 +69,6 @@ def findSolutionWithRotation(board, elements):
             return solution
 
 
-# Create your views here.
-@api_view(['POST'])
-def api_root(request, format=None):
-
-
-    board = np.array(request.data['board'])
-    elements = request.data['elements']
-    newElements = []
-    for element in elements:
-        newElements.append(np.array(element))
-
-
-    result = findSolutionWithRotation(board, newElements)
-    print result
-
-    return Response({
-        'success':True,
-        'message': result
- })
+def findSolutionWithNoRotation(board, elements):
+    solution = orderElements(board, elements)
+    return solution
