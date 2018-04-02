@@ -10,8 +10,7 @@ class Main extends Component {
     this.state = {
       message: 'Ici va arriver la reponse !',
       allelements: {
-        element0: [[3, 3], [3, 0]],
-        element1: [[2, 2, 2]],
+        element1: [[3, 3], [3, 0]],
         element2: [[7], [7], [7]],
         element3: [[1], [1], [1], [1]],
         element4: [[5, 5], [5, 5]],

@@ -2,9 +2,12 @@ div.Board {
   border: 1px solid grey;
   margin: 40px;
   display: flex;
+  flex-direction: row;
 }
 
 div.Line {
+  display: flex;
+  flex-direction: row;
 }
 
 div.Case {

@@ -12,16 +12,21 @@ class Board extends Component {
   render() {
     return (
       <div className="Board">
-        {this.props.board.constructor == Array
-          ? this.props.board.map((element, index) => {
-              return <Line {...this.props} line={element} key={index} />
-            })
-          : ''}
+        <div className="Board2">
+          {this.props.board.constructor == Array
+            ? this.props.board.map((element, index) => {
+                return <Line {...this.props} line={element} key={index} />
+              })
+            : ''}
+        </div>
         {this.props.type === 'presentation' ? (
-          <input
-            onChange={e => this.props.ModifState(this.props.index, e)}
-            type="number"
-          />
+          <div>
+            <label>Nb of iterations : </label>
+            <input
+              onChange={e => this.props.ModifState(this.props.index, e)}
+              type="number"
+            />
+          </div>
         ) : (
           ''
         )}
