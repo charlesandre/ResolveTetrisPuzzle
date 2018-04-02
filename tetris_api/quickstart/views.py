@@ -82,15 +82,18 @@ def findSolutionWithRotation(board, elements, size):
 # Create your views here.
 @api_view(['POST'])
 def api_root(request, format=None):
-    
+
     elements = request.data['elements']
     newElements = []
     for element in elements:
         newElements.append(np.array(element))
 
+    print newElements
+
     size = int(request.data['size'])
     board = np.zeros([size, size])
 
+    print "C PARTI"
     result = findSolutionWithRotation(board, newElements, size)
 
     if result == None:
@@ -100,6 +103,8 @@ def api_root(request, format=None):
     else:
         success = True
         message = result[1]
+
+    print "FINI"
 
     return Response({
         'success':success,

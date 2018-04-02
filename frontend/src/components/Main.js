@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import data from './mockdata.js'
 import axios from 'axios'
 import Board from './puzzle/Board'
+import { buildElementsArray } from './functions/genericFunctions.js'
 
 class Main extends Component {
   constructor(props) {
@@ -9,11 +10,13 @@ class Main extends Component {
     this.state = {
       message: 'Ici va arriver la reponse !',
       allelements: {
-        element1: [[3, 3], [3, 0]],
-        element3: [[2, 2, 2]],
-        element4: [[7], [7], [7]],
-        element5: [[1], [1], [1], [1]],
-        element6: [[5, 5], [5, 5]]
+        element0: [[3, 3], [3, 0]],
+        element1: [[2, 2, 2]],
+        element2: [[7], [7], [7]],
+        element3: [[1], [1], [1], [1]],
+        element4: [[5, 5], [5, 5]],
+        element5: [[4, 4]],
+        element6: [[0, 6], [0, 6], [6, 6]]
       },
       currentElements: {},
       sizeBoard: 5
@@ -31,23 +34,12 @@ class Main extends Component {
         [index]: e.target.value
       }
     })
-  }
-
-  builElementsArray = () => {
-    let elements = []
-    Object.keys(this.state.currentElements).map((element, index) => {
-      let number = this.state.currentElements[index]
-      for (let i = 0; i < number; i++) {
-        elements.push(
-          this.state.allelements[Object.keys(this.state.allelements)[index]]
-        )
-      }
-    })
-    return elements
+    console.log(this.state)
   }
 
   getData = () => {
-    let elements = this.builElementsArray()
+    let elements = buildElementsArray(this.state)
+    console.log(elements)
     let result = ''
     axios
       .post('http://localhost:8000/test/', {
