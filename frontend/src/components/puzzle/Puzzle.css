@@ -1,0 +1,38 @@
+div.Board {
+  border: 1px solid grey;
+  margin: 40px;
+  display: flex;
+}
+
+div.Line {
+}
+
+div.Case {
+  height: 50px;
+  width: 50px;
+}
+
+#Color1 {
+  background-color: blue;
+}
+#Color2 {
+  background-color: green;
+}
+#Color3 {
+  background-color: red;
+}
+#Color4 {
+  background-color: purple;
+}
+#Color5 {
+  background-color: grey;
+}
+#Color6 {
+  background-color: yellow;
+}
+#Color7 {
+  background-color: orange;
+}
+#Color8 {
+  background-color: brown;
+}

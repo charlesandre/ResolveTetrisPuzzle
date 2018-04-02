@@ -6,11 +6,8 @@ class Main extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <p>{this.props.value}</p>
-      </div>
-    )
+    const idColor = 'Color' + this.props.value
+    return <div className="Case" id={idColor} />
   }
 }
 

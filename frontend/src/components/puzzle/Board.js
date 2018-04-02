@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Line from './Line'
+import './Puzzle.css'
 
 class Board extends Component {
   constructor(props) {
