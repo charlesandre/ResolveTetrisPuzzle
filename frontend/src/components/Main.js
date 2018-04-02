@@ -23,20 +23,36 @@ class Main extends Component {
 
   componentWillMount = () => {}
 
-  buildElementArray = (index, e) => {
+  getSelectElements = (index, e) => {
     this.setState({
       ...this.state,
-      currentElements: { ...this.state.currentElements, index: e.target.value }
+      currentElements: {
+        ...this.state.currentElements,
+        [index]: e.target.value
+      }
     })
-    console.log(this.state)
+  }
+
+  builElementsArray = () => {
+    let elements = []
+    Object.keys(this.state.currentElements).map((element, index) => {
+      let number = this.state.currentElements[index]
+      for (let i = 0; i < number; i++) {
+        elements.push(
+          this.state.allelements[Object.keys(this.state.allelements)[index]]
+        )
+      }
+    })
+    return elements
   }
 
   getData = () => {
+    let elements = this.builElementsArray()
     let result = ''
     axios
       .post('http://localhost:8000/test/', {
-        board: data.data.board,
-        elements: data.data.elements
+        size: this.state.sizeBoard,
+        elements: elements
       })
       .then(response => {
         if (response.data.success === true) {
@@ -52,6 +68,11 @@ class Main extends Component {
     return (
       <div>
         <p> Create a puzzle : </p>
+        <label> Size of the board : </label>{' '}
+        <input
+          type="number"
+          onChange={e => this.setState({ sizeBoard: e.target.value })}
+        />
         {Object.keys(this.state.allelements).map((element, index) => {
           return (
             <Board
@@ -60,7 +81,7 @@ class Main extends Component {
               index={index}
               board={this.state.allelements[element]}
               type="presentation"
-              ModifState={this.buildElementArray}
+              ModifState={this.getSelectElements}
             />
           )
         })}

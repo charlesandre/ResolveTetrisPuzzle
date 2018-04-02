@@ -40,8 +40,8 @@ def fitElement(board, element):
         return False
 
 
-def fitBoard(board, elements):
-    board=np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0], [0,0,0,0]])
+def fitBoard(board, elements, size):
+    board = np.zeros([size, size])
     for element in elements:
         coordonates = fitElement(board, element)
         if coordonates != False:
@@ -52,9 +52,9 @@ def fitBoard(board, elements):
     return False, board
 
 
-def orderElements(board, elements):
+def orderElements(board, elements, size):
     for elements in list(itertools.permutations(elements)):
-        solution = fitBoard(board,elements)
+        solution = fitBoard(board,elements, size)
         if solution[0] == True:
             return True, solution, len(list(itertools.permutations(elements)))
     return False, board
@@ -71,10 +71,10 @@ def findEveryOrders(elements):
         array = []
     return list(itertools.product(*newElements))
 
-def findSolutionWithRotation(board, elements):
+def findSolutionWithRotation(board, elements, size):
     ElementsOrderedWithRotation = findEveryOrders(elements)
     for elements in ElementsOrderedWithRotation:
-        solution = orderElements(board, elements)
+        solution = orderElements(board, elements, size)
         if solution[0] == True:
             return solution[1]
 
@@ -82,24 +82,26 @@ def findSolutionWithRotation(board, elements):
 # Create your views here.
 @api_view(['POST'])
 def api_root(request, format=None):
-
-
-    board = np.array(request.data['board'])
+    
     elements = request.data['elements']
     newElements = []
     for element in elements:
         newElements.append(np.array(element))
 
-    result = findSolutionWithRotation(board, newElements)
+    size = int(request.data['size'])
+    board = np.zeros([size, size])
 
+    result = findSolutionWithRotation(board, newElements, size)
 
-    if result[0] == 'True':
-        result = result[1]
+    if result == None:
+        success = False
+        message = "Puzzle is not possible"
 
-    print result[0]
-    print result[1]
+    else:
+        success = True
+        message = result[1]
 
     return Response({
-        'success':result[0],
-        'message': result[1]
+        'success':success,
+        'message': message
  })
