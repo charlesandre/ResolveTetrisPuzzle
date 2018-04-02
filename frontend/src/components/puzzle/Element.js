@@ -17,14 +17,6 @@ class Board extends Component {
               return <Line {...this.props} line={element} key={index} />
             })
           : ''}
-        {this.props.type === 'presentation' ? (
-          <input
-            onChange={e => this.props.ModifState(this.props.index, e)}
-            type="number"
-          />
-        ) : (
-          ''
-        )}
       </div>
     )
   }
