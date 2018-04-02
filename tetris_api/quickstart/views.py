@@ -76,7 +76,7 @@ def findSolutionWithRotation(board, elements):
     for elements in ElementsOrderedWithRotation:
         solution = orderElements(board, elements)
         if solution[0] == True:
-            return solution
+            return solution[1]
 
 
 # Create your views here.
@@ -90,11 +90,16 @@ def api_root(request, format=None):
     for element in elements:
         newElements.append(np.array(element))
 
-
     result = findSolutionWithRotation(board, newElements)
-    print result
+
+
+    if result[0] == 'True':
+        result = result[1]
+
+    print result[0]
+    print result[1]
 
     return Response({
-        'success':True,
-        'message': result
+        'success':result[0],
+        'message': result[1]
  })
