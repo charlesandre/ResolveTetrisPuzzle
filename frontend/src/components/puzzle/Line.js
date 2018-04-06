@@ -8,7 +8,7 @@ class Line extends Component {
     return (
       <div className="Line">
         {this.props.line.map((element, index) => {
-          return <Case value={element} key={index} />
+          return <Case value={element} key={index} index={index} />
         })}
       </div>
     )

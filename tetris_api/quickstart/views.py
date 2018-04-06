@@ -62,18 +62,34 @@ def orderElements(board, elements, size):
 def findEveryOrders(elements):
     array = []
     newElements = []
+
     for element in elements:
-        array.append(element)
-        array.append(np.rot90(element))
-        array.append(np.rot90(np.rot90(element)))
-        array.append(np.rot90(np.rot90(np.rot90(element))))
+        if(1):
+            array.append(element)
+        else:
+            if(np.array_equal(element, np.array([[4,4],[4,4]]))):
+                array.append(element)
+            if(np.array_equal(element, np.array([[2], [2], [2]])) or np.array_equal(element, np.array([[3], [3], [3], [3]])) or np.array_equal(element, np.array([[5, 5]]))):
+                array.append(element)
+                array.append(np.rot90(element))
+            else:
+                array.append(element)
+                array.append(np.rot90(element))
+                array.append(np.rot90(np.rot90(element)))
+                array.append(np.rot90(np.rot90(np.rot90(element))))
         newElements.append(array)
         array = []
+
+    print("Possibilitées toutes trouvée : ")
     return list(itertools.product(*newElements))
 
 def findSolutionWithRotation(board, elements, size):
     ElementsOrderedWithRotation = findEveryOrders(elements)
+    i = 0
+    nb = len(ElementsOrderedWithRotation)
     for elements in ElementsOrderedWithRotation:
+        print(i, nb)
+        i = i+1
         solution = orderElements(board, elements, size)
         if solution[0] == True:
             return solution[1]

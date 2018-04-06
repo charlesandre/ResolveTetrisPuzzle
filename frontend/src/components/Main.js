@@ -10,12 +10,15 @@ class Main extends Component {
     this.state = {
       message: 'Ici va arriver la reponse !',
       allelements: {
-        element1: [[3, 3], [3, 0]],
-        element2: [[7], [7], [7]],
-        element3: [[1], [1], [1], [1]],
-        element4: [[5, 5], [5, 5]],
-        element5: [[4, 4]],
-        element6: [[0, 6], [0, 6], [6, 6]]
+        element1: [[1, 1, 0], [0, 1, 1]],
+        element2: [[2, 2, 2], [0, 2, 0]],
+        element3: [[3], [3], [3], [3]],
+        element4: [[4, 4], [4, 4]],
+        element5: [[5, 0], [5, 5], [0, 5]],
+        element6: [[0, 6], [0, 6], [6, 6]],
+        element7: [[7, 0], [7, 7], [7, 0]],
+        element8: [[8, 0, 0], [8, 8, 8]],
+        element9: [[9, 9], [0, 9], [0, 9]]
       },
       currentElements: {},
       sizeBoard: 5
@@ -38,6 +41,7 @@ class Main extends Component {
 
   getData = () => {
     let elements = buildElementsArray(this.state)
+    console.log('element send :')
     console.log(elements)
     let result = ''
     axios
@@ -48,7 +52,7 @@ class Main extends Component {
       .then(response => {
         if (response.data.success === true) {
           this.setState({ message: response.data.message })
-        } else console.log('Not possible ')
+        } else console.log('Not possible')
       })
       .catch(error => {
         console.log('Error : ' + error)

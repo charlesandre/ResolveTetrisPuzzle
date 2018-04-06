@@ -1,14 +1,13 @@
 export const buildElementsArray = state => {
   let elements = []
   Object.keys(state.currentElements).map((element, index) => {
+    console.log(element)
     let number = state.currentElements[element]
-    console.log(element, number)
+    console.log(number)
     for (let i = 0; i < number; i++) {
-      console.log('hello')
-      elements.push(state.allelements[Object.keys(state.allelements)[index]])
+      elements.push(state.allelements[Object.keys(state.allelements)[element]])
     }
   })
   console.log('result ! ')
-  console.log(elements)
   return elements
 }
